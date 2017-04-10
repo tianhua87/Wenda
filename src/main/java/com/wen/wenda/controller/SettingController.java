@@ -19,7 +19,6 @@ public class SettingController {
     @RequestMapping(path = {"/setting"},method = {RequestMethod.GET})
     @ResponseBody
     public String setting(){
-
         return "设置"+"<br>"+wendaService.getMessage("设置");
     }
 }
