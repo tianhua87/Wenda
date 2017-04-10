@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+</head>
+<body>
+
+<pre>
+    Parse: #parse("header.html")
+
+    姓名：$!{name}
+
+    #foreach($color in $colors)
+      Index: $!{foreach.index}  $color  Count: $!{foreach.count}
+    #end
+
+    User: $!{user.UserName}
+
+    #foreach($key in $number.keySet())
+        $key  $number.get($key)
+    #end
+
+    #set($val="自定义变量")
+    变量：$val
+    #set($val1="自定义变量1")
+    变量1：$val1
+
+    调用宏：#hanshu($val,$val1)
+
+
+    #macro (hanshu,$param1,$param2)
+        宏，相当于函数
+        参数1： $param1, 参数2： $param2
+    #end
+
+
+</pre>
+
+
+</body>
+</html>
