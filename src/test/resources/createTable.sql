@@ -16,8 +16,19 @@ create table question(
     title varchar(64) not null,
 	content text not null,
     user_id int(16) not null,
-    create_time datetime not null,
+    create_date datetime not null,
     comment_count int null,
     primary key(id),
-    index `date_index`(create_time asc)
+    index `date_index`(create_date asc)
+
+    drop table if exists `login_ticket`;
+create table `login_ticket`(
+	id int not null auto_increment,
+    user_id int(16) unsigned not null,
+    ticket varchar(45) not null,
+    expired datetime not null ,
+    `status` int not null default 0,
+    primary key(id),
+    unique index ticket_UNIQUE (ticket)
+)engine=InnoDB,charset=utf8
 );

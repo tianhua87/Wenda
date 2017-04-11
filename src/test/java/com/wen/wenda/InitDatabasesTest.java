@@ -1,6 +1,8 @@
 package com.wen.wenda;
 
+import com.wen.wenda.dao.QuestionDao;
 import com.wen.wenda.dao.UserDao;
+import com.wen.wenda.model.Question;
 import com.wen.wenda.model.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.junit.Assert;
@@ -11,6 +13,7 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.Date;
 import java.util.Random;
 
 /**
@@ -25,6 +28,9 @@ public class InitDatabasesTest {
     @Autowired
     UserDao userDao;
 
+    @Autowired
+    QuestionDao questionDao;
+
     @Test
     public void initDatabases(){
 
@@ -36,12 +42,20 @@ public class InitDatabasesTest {
             user.setPassword("wenjibin");
             user.setSalt("xx");
             userDao.addUser(user);
-
-            user.setPassword("sbsbsb");
-            userDao.updatePassword(user);
+            //user.setPassword("sbsbsb");
+            //userDao.updatePassword(user);
+            Question question=new Question();
+            question.setTitle("Title"+i);
+            question.setContent("sbsbsbsbsbbsi"+i*i);
+            Date date=new Date();
+            date.setTime(date.getTime()+3600*1000*i);
+            question.setCreateDate(date);
+            question.setCommentCount(i);
+            question.setUserId(i+1);
+            questionDao.addQuestion(question);
         }
-        userDao.deleteById(3);
-        Assert.assertEquals("sbsbsb",userDao.selectById(4).getPassword());
+        //userDao.deleteById(3);
+        //Assert.assertEquals("sbsbsb",userDao.selectById(4).getPassword());
     }
 
 }

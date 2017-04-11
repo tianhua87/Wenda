@@ -21,11 +21,12 @@ public class LoggerAspect {
 
     @Before("execution(* com.wen.wenda.controller.*.*(..))")
     public void beforeMethed(JoinPoint joinPoint){
-        logger.info("before Mether: "+joinPoint.getSignature().getName());
+        //logger.info("before Mether: "+joinPoint.getSignature().getName());
     }
 
     @After("execution(* com.wen.wenda.controller.*.*(..))")
     public void afterMethed(JoinPoint joinPoint){
-        logger.info("after Mether: "+joinPoint.getSignature().getName());
+
+        //logger.info("after Mether: "+joinPoint.getSignature().getName());
     }
 }

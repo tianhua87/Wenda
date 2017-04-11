@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace = "com.wen.wenda.dao.QuestionDao">
+    <sql id="table">question</sql>
+    <sql id="selectField">title,content,create_date,user_id,comment_count</sql>
+    <select id="selectLatesQuestions" resultType="com.wen.wenda.model.Question">
+        select
+        <include refid="selectField"/>
+         from
+        <include refid="table"/>
+         <if test="userId!=0">
+             where user_id=#{userId}
+         </if>
+        order by id desc
+        Limit #{offset},#{limit}
+    </select>
+</mapper>

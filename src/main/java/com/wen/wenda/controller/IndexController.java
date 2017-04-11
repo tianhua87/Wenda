@@ -19,7 +19,7 @@ import java.util.*;
  *
  * 网站首页
  */
-@Controller
+//@Controller
 public class IndexController {
 
     @Autowired
