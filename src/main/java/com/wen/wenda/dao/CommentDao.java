@@ -13,16 +13,16 @@ import java.util.List;
 public interface CommentDao {
 
     String TABLE_NAME =" comment ";
-    String INSERT_FIELD = " content,user_id,entry_id,entry_type,create_date,status ";
+    String INSERT_FIELD = " content,user_id,entity_id,entity_type,create_date,status ";
     String SELECT_FIELD = " id,"+INSERT_FIELD;
 
     @Insert({"insert into ",TABLE_NAME," ( ",INSERT_FIELD," ) values( ",
-    "#{content},#{userId},#{entryId},#{entryType},#{createDate},#{status})"})
+    "#{content},#{userId},#{entityId},#{entityType},#{createDate},#{status})"})
     int addComment(Comment comment);
 
-    @Select({"select ",SELECT_FIELD," from ",TABLE_NAME, "where entry_id=#{entryId} " +
-            "and entry_type=#{entryType}"})
-    List<Comment> selectByEntry(int entryId, String entryType);
+    @Select({"select ",SELECT_FIELD," from ",TABLE_NAME, "where entity_id=#{entityId} " +
+            "and entity_type=#{entityType}"})
+    List<Comment> selectByentity(int entityId, String entityType);
 
     @Select({"select ",SELECT_FIELD," from ",TABLE_NAME, "where id=#{id}"})
     Comment selectById(int id);
