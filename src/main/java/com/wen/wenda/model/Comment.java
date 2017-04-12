@@ -10,9 +10,18 @@ public class Comment {
     private int id;
     private String content;
     private int userId;
-    private String entryType;
-    private int entryId;
+    private String entityType;
+    private int entityId;
     private Date createDate;
+    private int status;
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
 
     public int getId() {
         return id;
@@ -38,20 +47,20 @@ public class Comment {
         this.userId = userId;
     }
 
-    public String getEntryType() {
-        return entryType;
+    public String getEntityType() {
+        return entityType;
     }
 
-    public void setEntryType(String entryType) {
-        this.entryType = entryType;
+    public void setEntityType(String entityType) {
+        this.entityType = entityType;
     }
 
-    public int getEntryId() {
-        return entryId;
+    public int getEntityId() {
+        return entityId;
     }
 
-    public void setEntryId(int entryId) {
-        this.entryId = entryId;
+    public void setEntityId(int entityId) {
+        this.entityId = entityId;
     }
 
     public Date getCreateDate() {
