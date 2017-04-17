@@ -20,12 +20,18 @@ public interface CommentDao {
     "#{content},#{userId},#{entityId},#{entityType},#{createDate},#{status})"})
     int addComment(Comment comment);
 
-    @Select({"select ",SELECT_FIELD," from ",TABLE_NAME, "where entity_id=#{entityId} " +
+    @Select({"select ",SELECT_FIELD," from ",TABLE_NAME, " where entity_id=#{entityId} " +
             "and entity_type=#{entityType}"})
-    List<Comment> selectByentity(int entityId, String entityType);
+    List<Comment> selectByEntity(@Param("entityId") int entityId,
+                                 @Param("entityType") String entityType);
 
     @Select({"select ",SELECT_FIELD," from ",TABLE_NAME, "where id=#{id}"})
     Comment selectById(int id);
+
+    @Select({"select count(*) from ",TABLE_NAME, " where entity_id=#{entityId}",
+    " and entity_type=#{entityType}"})
+    int getCommentCount(@Param("entityId") int entityId,
+                        @Param("entityType") String entityType);
 
     @Update({"update ",TABLE_NAME," set status=#{status} where id=#{id}"})
     int updateStatus(int status,int id);

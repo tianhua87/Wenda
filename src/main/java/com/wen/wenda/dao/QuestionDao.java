@@ -20,8 +20,16 @@ public interface QuestionDao {
             "#{title},#{content},#{createDate},#{userId},#{commentCount})"})
     int addQuestion(Question question);
 
+    @Select({"select ",SELECT_FIELD," from ",TABLE_NAME ,"where id=#{questionId}"})
+    Question selectQuestionById(int questionId);
+
     List<Question> selectLatesQuestions(@Param("userId") int userId,
                                        @Param("offset") int offset,
                                        @Param("limit") int limit);
+
+    @Update({"update ",TABLE_NAME, " set comment_count=#{commentCount} ",
+            "where id=#{questionId}",})
+    public int updateQuetionComment(@Param("questionId") int questionId,
+                                    @Param("commentCount") int commentCount);
 
 }

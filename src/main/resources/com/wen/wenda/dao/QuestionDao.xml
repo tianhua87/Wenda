@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace = "com.wen.wenda.dao.QuestionDao">
     <sql id="table">question</sql>
-    <sql id="selectField">title,content,create_date,user_id,comment_count</sql>
+    <sql id="selectField">id,title,content,create_date,user_id,comment_count</sql>
     <select id="selectLatesQuestions" resultType="com.wen.wenda.model.Question">
         select
         <include refid="selectField"/>

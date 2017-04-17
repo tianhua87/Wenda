@@ -32,3 +32,35 @@ create table `login_ticket`(
     unique index ticket_UNIQUE (ticket)
 )engine=InnoDB,charset=utf8
 );
+
+
+drop table if exists `comment`;
+create table `comment`(
+	id int not null auto_increment,
+    `content` text not null,
+    entity_id int not null,
+    entity_type varchar(64) not null,
+    create_date datetime not null,
+    user_id int not null,
+    `status` int not null default 0,
+    primary key(id),
+    unique index `entity_id_index` (entity_id),
+    unique index `entity_type_index` (entity_type)
+)engine=InnoDB,charset=utf8;
+
+
+drop table if exists `message`;
+create table `message`(
+
+id int not null auto_increment,
+from_id int not null ,
+to_id int not null,
+has_read int not null default 0,
+content text not null,
+create_date datetime not null,
+conversation_id varchar(128) not null,
+primary key(id),
+index from_id_index(from_id),
+index to_id_index(to_id)
+
+)engine=InnoDB,charset=utf8

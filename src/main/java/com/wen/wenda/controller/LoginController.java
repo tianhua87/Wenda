@@ -99,39 +99,4 @@ public class LoginController {
 
         return "redirect:/login";
     }
-
-    //发布问题
-    @RequestMapping(value = {"/question/add"},method = {RequestMethod.POST})
-    @ResponseBody
-    public String addQuestion(@RequestParam("title") String title,
-                              @RequestParam("content") String content){
-        Question question=new Question();
-        question.setTitle(title);
-        question.setContent(content);
-        question.setCreateDate(new Date());
-        question.setCommentCount(0);
-        System.out.println(title+" "+content);
-
-        //如果用户未登陆，直接跳转到登录界面，前台收到code：999会跳转到登录界面
-        if(hostHolder.getUser()==null)
-        {
-            System.out.println(WendaUtil.getJSONString(999));
-            return WendaUtil.getJSONString(999);
-        }else{
-            System.out.println(WendaUtil.getJSONString(0));
-            question.setUserId(hostHolder.getUser().getId());
-
-            int result=questionService.addQuestion(question);
-            if(result>0)
-                return WendaUtil.getJSONString(0);
-            else{
-                logger.error("添加问题失败");
-                return WendaUtil.getJSONString(999);
-            }
-
-        }
-
-
-    }
-
 }
