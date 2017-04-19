@@ -2,6 +2,7 @@ package com.wen.wenda.controller;
 
 import com.wen.wenda.model.*;
 import com.wen.wenda.service.CommentService;
+import com.wen.wenda.service.LikeService;
 import com.wen.wenda.service.QuestionService;
 import com.wen.wenda.service.UserService;
 import com.wen.wenda.utils.WendaUtil;
@@ -33,6 +34,8 @@ public class QuestionController {
     UserService userService;
     @Autowired
     HostHolder hostHolder;
+    @Autowired
+    LikeService likeService;
 
     //问题详情页
     @RequestMapping(value = {"/question/{qid}"},method = {RequestMethod.GET})
@@ -52,12 +55,23 @@ public class QuestionController {
                 ViewObject vo = new ViewObject();
                 vo.set("comment", comment);
                 vo.set("user",userService.getUser(comment.getUserId()));
+                long likeCount=likeService.getLikeCount(EntityType.COMMENT,comment.getId());
+                int likeStatus=0;
+                if(hostHolder.getUser()!=null) {
+                    likeStatus = likeService.getLikeStatus(hostHolder.getUser().getId(),EntityType.COMMENT,comment.getId());
+                }
+                else{
+                    likeStatus=0;
+                }
+                vo.set("liked",likeStatus);
+                vo.set("likeCount",likeCount);
+
                 vos.add(vo);
             }
-            model.addAttribute("vos",vos);
+            model.addAttribute("comments",vos);
         }else
             return "error404";
-        return "detail";
+        return "detail1";
     }
 
 

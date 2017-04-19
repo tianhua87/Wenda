@@ -5,4 +5,5 @@ package com.wen.wenda.model;
  */
 public class EntityType {
     public static final String QUESTION="question";
+    public static final String COMMENT="comment";
 }
